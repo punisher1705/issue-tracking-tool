@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const shortid = require('shortid')
-const secretKey = 'someVeryRandomStringThatNobodyCanGuess';
+const secretKey = 'punisher1705kangutkarrohan@1994';
 
 let generateToken = (data, cb) => {
     try{
@@ -9,7 +9,7 @@ let generateToken = (data, cb) => {
             iat: Date.now(),
             exp: Math.floor(Date.now()/1000)+(60*60*24),
             sub: 'authToken',
-            iss: 'edChat',
+            iss: 'issueTracking',
             data: data
         }
         let tokenDetails = {
@@ -21,5 +21,23 @@ let generateToken = (data, cb) => {
         console.log(err)
         cb(err,null)
     }
+}// end generate function
+
+let verifyClaim = (token, cb) => {
+    jwt.verify(token, secretKey, function(err, decoded){
+        if(err){
+            console.log('Error While Verify token')
+            console.log(err);
+            cb(err,null)
+        } else {
+            console.log('User Verified')
+            console.log(decoded)
+            cb(null,decoded)
+        }
+    })
 }
 
+module.exports = {
+    generateToken: generateToken,
+    verifyClaim: verifyClaim
+}

@@ -1,5 +1,5 @@
 let Email = (email) => {
-    let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+  let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
     if (email.match(emailRegex)) {
       return email
     } else {
@@ -17,8 +17,18 @@ let Email = (email) => {
     }
   }
   
+  //to check password andconfirm password field match
+  // let passwordMatch = (password, confirmPassword) => {
+  //   if(password.match(confirmPassword)) {
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // }
+
   module.exports = {
     Email: Email,
-    Password: Password
+    Password: Password,
+    // passwordMatch: passwordMatch
   }
   
