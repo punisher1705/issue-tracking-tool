@@ -5,7 +5,7 @@ const secretKey = 'punisher1705kangutkarrohan@1994';
 let generateToken = (data, cb) => {
     try{
         let claims = {
-            jwtid: shortid.generate,
+            jwtid: shortid.generate(),
             iat: Date.now(),
             exp: Math.floor(Date.now()/1000)+(60*60*24),
             sub: 'authToken',
@@ -23,7 +23,7 @@ let generateToken = (data, cb) => {
     }
 }// end generate function
 
-let verifyClaim = (token, cb) => {
+let verifyClaim = (token, secretKey, cb) => {
     jwt.verify(token, secretKey, function(err, decoded){
         if(err){
             console.log('Error While Verify token')
@@ -39,5 +39,5 @@ let verifyClaim = (token, cb) => {
 
 module.exports = {
     generateToken: generateToken,
-    verifyClaim: verifyClaim
+    verifyToken: verifyClaim
 }

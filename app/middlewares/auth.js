@@ -10,6 +10,7 @@ const check = require('./../libs/checkLib')
 let isAuthorized = (req, res, next) => {
     if(req.params.authToken || req.query.authToken || req.body.authToken || req.header('authToken')){
         Auth.findOne({authToken: req.header('authToken') || req.params.authToken || req.body.authToken || req.query.authToken},(err, authDetails)=>{
+            // console.log(authDetails)
             if(err){
                 console.log(err)
                 logger.error(err.message, 'AuthorizationMiddleware',10)
@@ -21,7 +22,7 @@ let isAuthorized = (req, res, next) => {
                 res.send(apiResponse)
             } else {
                 token.verifyToken(authDetails.authToken,authDetails.tokenSecret,(err, decoded)=>{
-                    console.log(decoded)
+                    // console.log(decoded)
                     if(err){
                         logger.error(err.message, 'Authorization MiddleWare',10)
                         let apiResponse = responseLib.generate(true, 'Failed To Authorized', 500, null)

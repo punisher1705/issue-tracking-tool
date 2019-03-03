@@ -83,7 +83,7 @@ let editUser = (req, res) => {
         if (err) {
             console.log(err)
             logger.error(err.message, 'User Controller:editUser', 10)
-            let apiResponse = response.generate(true, 'Failed To edit user details', 500, null)
+            let apiResponse = response.generate(true, 'Failed To Update User details', 500, null)
             res.send(apiResponse)
         } else if (check.isEmpty(result)) {
             logger.info('No User Found', 'User Controller: editUser')
@@ -117,7 +117,7 @@ let signUpFunction = (req, res) => {
                 }
             } else {
                 logger.error('One or More Field Missing During Creation of User','userController: createUser()',5)
-                let apiResponse = response.generate(true,'One or Mode Parameter is Missing',400,null) 
+                let apiResponse = response.generate(true,'One or More Parameter is Missing',400,null) 
                 reject(apiResponse)
             }
         })
@@ -133,7 +133,7 @@ let signUpFunction = (req, res) => {
                     reject(apiResponse)
                 } else if(check.isEmpty(retrievedUserDetails)){
                     let newUser = new UserModel({
-                        userId: 'User - '+shortid.generate(),
+                        userId: 'User-'+shortid.generate(),
                         firstName: req.body.firstName,
                         lastName: req.body.lastName || '',
                         email: req.body.email.toLowerCase(),
@@ -144,7 +144,7 @@ let signUpFunction = (req, res) => {
                     newUser.save((err, newUser) => {
                         if(err){
                             looger.error(err.message,'userController: createUser',10)
-                            let apiResponse = response.generate(true,'Failes to create User',500,null)
+                            let apiResponse = response.generate(true,'Failed to create User',500,null)
                             reject(apiResponse)
                         } else {
                             let newUserObj = newUser.toObject();
@@ -180,7 +180,7 @@ let loginFunction = (req, res) => {
         return new Promise((resolve, reject) => {
             if(req.body.email){
                 UserModel.findOne({email:req.body.email},(err,userDetails) => {
-                    console.log(userDetails)
+                    // console.log(userDetails)
                     if(err){
                         console.log(err)
                         logger.error('Failed to Retrieve User Data','userController: fiindUser()',10)
@@ -203,7 +203,7 @@ let loginFunction = (req, res) => {
     }
 
     let validatePassword = (retrievedUserDetails) => {
-        console.log(retrievedUserDetails)
+        // console.log(retrievedUserDetails)
         return new Promise((resolve,reject) => {
             passwordLib.comparePassword(req.body.password, retrievedUserDetails.password, (err, isMatch) => {
                 if(err){
@@ -229,9 +229,11 @@ let loginFunction = (req, res) => {
     }
 
     let generateToken = (userDetails) => {
-        console.log('generate Token')
+        // console.log('generate Token')
+        // console.log(userDetails);
         return new Promise((resolve, reject) => {
             token.generateToken(userDetails, (err, tokenDetails) => {
+                // console.log(tokenDetails)
                 if(err){
                     console.log(err)
                     let apiResponse = response.generate(true, 'Failed To Generate Token', 500, null)
@@ -254,6 +256,7 @@ let loginFunction = (req, res) => {
                     let apiResponse = response.generate(true, 'Failed To Generate Token', 500, null)
                     reject(apiResponse)
                 } else if (check.isEmpty(retrievedTokenDetails)){
+                    // console.log(retrievedTokenDetails)
                     let newAuthToken = new AuthModel({
                         userId: tokenDetails.userId,
                         authtoken: tokenDetails.token,
@@ -261,6 +264,7 @@ let loginFunction = (req, res) => {
                         tokenGenerationTime: time.now()
                     })
                     newAuthToken.save((err,newTokenDetails)=>{
+                        // console.log(newTokenDetails)
                         if(err){
                             console.log(err)
                             logger.error(err.message, 'userController: saveToken', 10)
@@ -271,6 +275,7 @@ let loginFunction = (req, res) => {
                                 authToken: newTokenDetails.authToken,
                                 userDetails: tokenDetails.userDetails
                             }
+                            // console.log('responseBOdy '+responseBody)
                             resolve(responseBody)
                         }
                     })
@@ -330,7 +335,7 @@ let logout = (req, res) => {
         let apiResponse = response.generate(true, 'Already Logged Out or Invalid UserId', 404, null)
         res.send(apiResponse)
     } else {
-        let apiResponse = response.generate(false, 'Logged Out Successfully', 200, null)
+        let apiResponse = response.generate(false, 'Logged Out Successfully', 200, result)
         res.send(apiResponse)
     }
   })
