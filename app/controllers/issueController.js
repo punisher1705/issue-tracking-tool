@@ -8,10 +8,7 @@ const check = require('../libs/checkLib')
 const token = require('../libs/tokenLib')
 
 //Models
-const UserModel = mongoose.model('User')
 const IssueModel = mongoose.model('Issue')
-const CommentModel = mongoose.model('Comments')
-const WatcherModel = mongoose.model('Watcher')
 
 //get all issues list
 let getAllIssues = (req, res) => {
