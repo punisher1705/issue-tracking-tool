@@ -6,7 +6,7 @@ const appConfig = require('./../../config/appConfig')
 module.export.setRouter = (app) => {
     let baseUrl = `${appConfig.apiVersion}/watcher`
 
-    app.get(`${baseUrl}/view/all`,watcherController.getAllWathcers)
+    app.get(`${baseUrl}/view/all`,watcherController.getAllWatchers)
 
     // app.get(`${baseUrl}/:watcherId/details`,watcherController.getSingleWatcher)
 
