@@ -34,7 +34,10 @@ let getAllWatchers = (req, res) => {
 
 //created watcher
 // let createWatcher = (req, res) => {
-//     WatcherModel.
+//     let newWatcher = new WatcherModel({
+//         watcherId: 'W'-shortid.generate(),
+//         issueId: 
+//     })
 // }
 
 module.exports = {

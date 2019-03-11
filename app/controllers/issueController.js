@@ -150,11 +150,14 @@ let deleteIssue = (req, res) => {
     )
 }
 
+}
+//add watcher
+
 
 module.exports = {
     getAllIssues: getAllIssues,
     createIssue: createIssue,
     getSingleIssue: getSingleIssue,
     editIssue: editIssue,
-    deleteIssue: deleteIssue
+    deleteIssue: deleteIssue,
 }

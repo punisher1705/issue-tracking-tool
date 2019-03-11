@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
         if(apiResponse.status === 200) {
           console.log(apiResponse)
           this.cookieService.set('receiverId',apiResponse.data.userDetails.userId)
-          this.cookieService.set('receiverId',apiResponse.data.userDetails.firstName + ' ' + apiResponse.data.userDetails.lastName)
+          this.cookieService.set('receiverName',apiResponse.data.userDetails.firstName + ' ' + apiResponse.data.userDetails.lastName)
           this.appService.setUserInfoInLocalStorage(apiResponse.data.userDetails)
           // this.router.navigate([])
         } else {

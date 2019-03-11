@@ -8,6 +8,7 @@ import { SearchIssueModule } from './search-issue/search-issue.module';
 import { IssueTrackingModule } from './issue-tracking/issue-tracking.module';
 import { AppRoutingModule } from './app-routing.module';
 
+import { IssueListViewComponent } from './issue-tracking/issue-list-view/issue-list-view.component';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './users/login/login.component';
 // import { SignupComponent } from './users/signup/signup.component';
@@ -17,6 +18,7 @@ import { SearchComponent } from './search-issue/search/search.component';
 
 import { AppServiceService } from './app-service.service';
 import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +39,7 @@ import { HttpClientModule } from '@angular/common/http';
       {path:'',redirectTo:'login',pathMatch:'full'},
       {path:'about',component:AboutComponent},
       {path:'search',component:SearchComponent},
-      // {path:'blog/:blogId',component:BlogViewComponent},
+      {path:'view/allIssues',component:IssueListViewComponent},
       // {path:'create',component:BlogCreateComponent},
       // {path:'edit/:blogId',component:BlogEditComponent},
       {path:'**',component:NotFoundComponent}
