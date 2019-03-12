@@ -143,7 +143,7 @@ let signUpFunction = (req, res) => {
                     })
                     newUser.save((err, newUser) => {
                         if(err){
-                            looger.error(err.message,'userController: createUser',10)
+                            logger.error(err.message,'userController: createUser',10)
                             let apiResponse = response.generate(true,'Failed to create User',500,null)
                             reject(apiResponse)
                         } else {

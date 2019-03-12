@@ -19,6 +19,10 @@ let watcherSchema = new Schema({
     userName: {
         type: String,
         default: ''
+    },
+    createdOn: {
+        type: Date,
+        default: ''
     }
 })
 

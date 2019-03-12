@@ -150,8 +150,6 @@ let deleteIssue = (req, res) => {
     )
 }
 
-}
-//add watcher
 
 
 module.exports = {

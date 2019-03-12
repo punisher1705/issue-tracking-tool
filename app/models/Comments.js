@@ -21,6 +21,10 @@ let commentSchema = new Schema({
     issueId: {
         type: String,
         default: ''
+    },
+    createdOn: {
+        typr: Date,
+        default: ''
     }
 
 })
